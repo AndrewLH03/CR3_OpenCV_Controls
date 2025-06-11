@@ -1,6 +1,6 @@
-# CR3 Robotic Arm Hand Tracking Control System
+# CR3_OpenCV_Controls
 
-**Advanced robotic arm control system with real-time hand tracking using MediaPipe computer vision for DoBot CR3 robot manipulation in 3D space.**
+**Advanced robotic arm control system with real-time hand tracking using OpenCV and MediaPipe computer vision for DoBot CR3 robot manipulation in 3D space.**
 
 **Version:** 3.0.0  
 **Status:** 🟢 Production Ready - Reorganized Structure  
