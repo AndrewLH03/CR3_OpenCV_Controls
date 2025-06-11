@@ -27,6 +27,8 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/RobotStatus.msg"
   "msg/HandPosition.msg"
   "msg/SafetyStatus.msg"
+  "msg/SafetyAlert.msg"
+  "msg/CoordinateTransform.msg"
   "srv/EmergencyStop.srv"
   "srv/SetParameters.srv"
   DEPENDENCIES builtin_interfaces std_msgs geometry_msgs diagnostic_msgs
@@ -48,13 +50,50 @@ ament_target_dependencies(basic_robot_controller
   tf2_geometry_msgs
 )
 
+# Build workspace validator executable
+add_executable(workspace_validator src/workspace_validator.cpp)
+
+ament_target_dependencies(workspace_validator
+  rclcpp
+  std_msgs
+  geometry_msgs
+  builtin_interfaces
+)
+
+# Build emergency stop handler executable
+add_executable(emergency_stop_handler src/emergency_stop_handler.cpp)
+
+ament_target_dependencies(emergency_stop_handler
+  rclcpp
+  std_msgs
+  geometry_msgs
+  builtin_interfaces
+)
+
+# Build coordinate broadcaster executable
+add_executable(coordinate_broadcaster src/coordinate_broadcaster.cpp)
+
+ament_target_dependencies(coordinate_broadcaster
+  rclcpp
+  tf2_ros
+  tf2_geometry_msgs
+  geometry_msgs
+  builtin_interfaces
+)
+
 # Link the generated messages
 rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME} "rosidl_typesupport_cpp")
 target_link_libraries(basic_robot_controller "${cpp_typesupport_target}")
+target_link_libraries(workspace_validator "${cpp_typesupport_target}")
+target_link_libraries(emergency_stop_handler "${cpp_typesupport_target}")
+target_link_libraries(coordinate_broadcaster "${cpp_typesupport_target}")
 
 # Install targets
 install(TARGETS
   basic_robot_controller
+  workspace_validator
+  emergency_stop_handler
+  coordinate_broadcaster
   DESTINATION lib/${PROJECT_NAME}
 )
 
@@ -62,6 +101,9 @@ install(TARGETS
 install(PROGRAMS
   scripts/parameter_manager.py
   scripts/diagnostics_monitor.py
+  scripts/safety_monitor.py
+  scripts/transform_manager.py
+  scripts/calibration_node.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

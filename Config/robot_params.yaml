@@ -49,4 +49,4 @@ logging:
   level: "INFO"
   file_enabled: true
   console_enabled: true
-  log_directory: "../cr3_ws/log/"
+  log_directory: "../ros2_package/log/"

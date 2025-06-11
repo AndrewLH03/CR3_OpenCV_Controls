@@ -1,5 +1,5 @@
 # Emergency stop service
-uint8 stop_type     # 0=Soft stop, 1=Hard stop, 2=Emergency halt
+string stop_type    # "soft", "hard", "emergency", "reset"
 string reason       # Reason for emergency stop
 ---
 bool success        # Whether stop was executed successfully

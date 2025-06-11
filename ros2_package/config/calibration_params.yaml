@@ -1,0 +1,26 @@
+calibration:
+  camera_frame: "camera_link"
+  robot_base_frame: "base_link"
+  world_frame: "world"
+  
+  accuracy_requirements:
+    position_tolerance: 2.0  # mm
+    rotation_tolerance: 1.0  # degrees
+    
+  calibration_points:
+    num_points: 9           # 3x3 grid for calibration
+    workspace_coverage: 0.8  # Use 80% of workspace for calibration
+    
+  validation:
+    test_points: 5          # Number of validation points
+    max_error: 3.0          # mm maximum allowed error
+    min_samples: 10         # Minimum calibration samples per point
+    
+  transforms:
+    update_frequency: 30.0   # Hz - transform update rate
+    timeout: 1.0            # seconds - transform timeout
+    
+  camera:
+    # These will be populated during calibration
+    translation: [0.0, 0.0, 0.0]  # [x, y, z] in mm
+    rotation: [0.0, 0.0, 0.0, 1.0]  # [x, y, z, w] quaternion

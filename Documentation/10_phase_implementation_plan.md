@@ -23,8 +23,8 @@ This document outlines a comprehensive 10-phase implementation plan for the CR3 
 ### Tasks
 1. **Create ROS2 Package Structure**
    ```bash
-   mkdir -p ~/cr3_ws/src
-   cd ~/cr3_ws/src
+   mkdir -p ~/ros2_package
+   cd ~/ros2_package
    ros2 pkg create --build-type ament_cmake cr3_hand_control
    cd cr3_hand_control
    ```

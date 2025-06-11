@@ -28,11 +28,17 @@ This system provides seamless control of a DoBot CR3 robotic arm through hand tr
 ```
 robotic_arm_workspace/
 ├── README.md                          # This file
-├── cr3_ws/                           # ROS2 Jazzy workspace
-│   ├── src/cr3_hand_control/         # Main ROS2 package
+├── ros2_package/                     # ROS2 Jazzy package
+│   ├── scripts/                      # Python nodes and scripts
+│   ├── src/                          # C++ source files
+│   ├── msg/                          # ROS2 message definitions
+│   ├── srv/                          # ROS2 service definitions
+│   ├── launch/                       # Launch files
+│   ├── config/                       # Configuration files
 │   ├── build/                        # ROS2 build artifacts
 │   ├── install/                      # ROS2 installation files
-│   └── log/                          # Build and runtime logs
+│   ├── log/                          # Build and runtime logs
+│   └── test/                         # Test files
 ├── Documentation/                     # Complete project documentation
 │   ├── README.md                     # Documentation index
 │   ├── Phases/                       # 10-phase implementation plan
@@ -70,8 +76,8 @@ robotic_arm_workspace/
 # Source ROS2 Jazzy environment
 source /opt/ros/jazzy/setup.bash
 
-# Build the ROS2 workspace
-cd cr3_ws
+# Build the ROS2 package
+cd ros2_package
 colcon build --packages-select cr3_hand_control
 source install/setup.bash
 ```
@@ -93,7 +99,7 @@ python cr3_simple_controller.py
 ### 4. Launch Complete System (ROS2)
 ```bash
 # Launch full ROS2 system (when available)
-cd cr3_ws
+cd ros2_package
 ros2 launch cr3_hand_control complete_system.launch.py
 ```
 

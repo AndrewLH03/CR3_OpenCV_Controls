@@ -1,0 +1,33 @@
+safety:
+  workspace_boundaries:
+    x_min: -400.0
+    x_max: 400.0
+    y_min: -400.0
+    y_max: 400.0
+    z_min: 50.0
+    z_max: 600.0
+    buffer_zone: 20.0      # mm safety buffer
+    
+  emergency_response:
+    soft_stop_decel: 200.0   # mm/s²
+    hard_stop_decel: 500.0   # mm/s²
+    emergency_decel: 1000.0  # mm/s²
+    response_timeout: 0.1    # seconds
+    
+  speed_limiting:
+    approach_distance: 50.0  # mm from boundary to start slowing
+    minimum_speed: 5.0       # mm/s minimum movement speed
+    safety_speed_factor: 0.5 # Speed reduction factor near boundaries
+    
+  collision_detection:
+    detection_radius: 30.0   # mm collision detection radius
+    prediction_time: 0.5     # seconds to predict ahead
+    
+  monitoring:
+    update_frequency: 100.0  # Hz - safety monitoring frequency
+    alert_persistence: 5.0   # seconds to keep alerts active
+    
+  zones:
+    danger_zone_distance: 10.0   # mm from boundary = danger
+    warning_zone_distance: 30.0  # mm from boundary = warning
+    approach_zone_distance: 50.0 # mm from boundary = approach

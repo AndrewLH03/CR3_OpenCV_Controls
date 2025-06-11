@@ -17,7 +17,7 @@
 ```
 robotic_arm_workspace/                    # ROOT (CLEAN)
 ├── README.md                            # Main project overview
-├── cr3_ws/                             # ROS2 workspace
+├── ros2_package/                       # ROS2 package (standalone)
 ├── Documentation/                       # ALL documentation
 ├── Dashboards/                         # UI applications
 ├── Robot_Controls/                     # Robot control logic
@@ -30,7 +30,7 @@ robotic_arm_workspace/                    # ROOT (CLEAN)
 
 **CRITICAL RULE**: The main directory (`robotic_arm_workspace/`) should ONLY contain:
 - `README.md` - Main project overview
-- **Core folders only** (cr3_ws, Documentation, Dashboards, Robot_Controls, Testing, TCP-IP-ROS-6AXis, Config)
+- **Core folders only** (ros2_package, Documentation, Dashboards, Robot_Controls, Testing, TCP-IP-ROS-6AXis, Config)
 
 ### ❌ NEVER ADD TO MAIN DIRECTORY:
 - Scripts or individual implementation files
@@ -39,7 +39,7 @@ robotic_arm_workspace/                    # ROOT (CLEAN)
 - Configuration files
 - Documentation files (except main README.md)
 - Log files
-- Build artifacts (use cr3_ws/build/)
+- Build artifacts (use ros2_package/build/)
 - Any temporary or development files
 
 ## 📁 NEW DIRECTORY STRUCTURE
@@ -222,8 +222,14 @@ rm -rf Scripts/
 ```
 robotic_arm_workspace/
 ├── README.md                           # Main project overview
-├── cr3_ws/                            # ROS2 workspace (untouched)
-│   ├── src/cr3_hand_control/
+├── ros2_package/                      # ROS2 package (self-contained)
+│   ├── scripts/                       # Python nodes
+│   ├── src/                          # C++ source files
+│   ├── msg/                          # Message definitions
+│   ├── srv/                          # Service definitions
+│   ├── launch/                       # Launch files
+│   ├── config/                       # Configuration files
+│   ├── test/                         # Test files
 │   ├── build/
 │   ├── install/
 │   └── log/
