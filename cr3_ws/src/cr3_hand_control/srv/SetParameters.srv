@@ -1,0 +1,11 @@
+# Parameter management service
+# Allows runtime parameter updates with validation
+
+string parameter_name    # Name of parameter to set
+string parameter_value   # New parameter value (as string)
+bool validate_only      # If true, only validate without setting
+---
+bool success            # Whether parameter was set successfully
+string message          # Status or error message
+string old_value        # Previous parameter value
+bool requires_restart   # Whether restart is needed for parameter to take effect

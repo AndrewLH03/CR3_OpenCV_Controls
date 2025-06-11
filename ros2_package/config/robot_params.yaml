@@ -1,0 +1,28 @@
+# CR3 Hand Control System Parameters
+robot:
+  ip_address: "192.168.1.6"
+  tcp_port: 29999
+  connection_timeout: 5.0
+  
+workspace:
+  x_min: -400.0
+  x_max: 400.0
+  y_min: -400.0
+  y_max: 400.0
+  z_min: 50.0
+  z_max: 600.0
+  
+motion:
+  max_velocity: 100.0
+  safety_velocity: 50.0
+  
+hand_tracking:
+  confidence_threshold: 0.7
+  update_rate: 30.0
+  
+safety:
+  emergency_stop_decel: 1000.0
+  collision_threshold: 5.0
+  
+system:
+  log_level: "INFO"

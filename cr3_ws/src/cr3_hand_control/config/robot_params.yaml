@@ -1,0 +1,76 @@
+# CR3 Hand Control System Parameters
+# Configuration file for robot control and hand tracking system
+
+/**:
+  ros__parameters:
+    
+    # Robot Configuration
+    robot:
+      ip_address: "192.168.1.6"
+      control_port: 29999
+      dashboard_port: 29999
+      realtime_port: 30003
+      connection_timeout: 5.0
+      max_retry_attempts: 3
+      
+    # Movement Parameters
+    movement:
+      max_velocity: 0.5        # m/s
+      max_acceleration: 1.0    # m/s²
+      safety_margin: 0.05      # meters from workspace boundary
+      smooth_factor: 0.8       # Motion smoothing (0.0-1.0)
+      
+    # Workspace Boundaries (in meters)
+    workspace:
+      x_min: -0.3
+      x_max: 0.3
+      y_min: -0.3
+      y_max: 0.3
+      z_min: 0.05
+      z_max: 0.4
+      
+    # Hand Tracking Configuration
+    hand_tracking:
+      camera_index: 0
+      detection_confidence: 0.7
+      tracking_confidence: 0.5
+      max_num_hands: 1
+      model_complexity: 1
+      
+    # Safety Parameters
+    safety:
+      emergency_stop_timeout: 0.1   # seconds
+      workspace_check_frequency: 100  # Hz
+      collision_check_distance: 0.1   # meters
+      max_force_threshold: 50.0       # Newtons
+      
+    # QoS Profiles
+    qos:
+      robot_commands:
+        reliability: "reliable"
+        durability: "volatile"
+        deadline_ms: 50
+        
+      hand_tracking:
+        reliability: "best_effort"
+        durability: "volatile"
+        deadline_ms: 33  # ~30 FPS
+        
+      safety_status:
+        reliability: "reliable"
+        durability: "transient_local"
+        deadline_ms: 10
+        
+    # Logging Configuration
+    logging:
+      level: "INFO"  # DEBUG, INFO, WARN, ERROR
+      log_to_file: true
+      log_file_path: "/tmp/cr3_hand_control.log"
+      max_log_size_mb: 100
+      
+    # Performance Monitoring
+    performance:
+      monitor_enabled: true
+      stats_publish_rate: 1.0  # Hz
+      latency_threshold_ms: 50
+      cpu_threshold_percent: 80

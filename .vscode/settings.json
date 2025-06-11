@@ -1,4 +1,4 @@
 {
     "git.ignoreLimitWarning": true,
-    "cmake.sourceDirectory": "/home/andrewlh/robotic_arm_workspace/cr3_ws/src/cr3_hand_control"
+    "cmake.sourceDirectory": "/home/andrewlh/CR3_OpenCV_Controls/build/cr3_hand_control__py"
 }

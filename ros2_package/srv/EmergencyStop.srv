@@ -1,0 +1,7 @@
+# Emergency stop service
+uint8 stop_type     # 0=Soft stop, 1=Hard stop, 2=Emergency halt
+string reason       # Reason for emergency stop
+---
+bool success        # Whether stop was executed successfully
+string message      # Status message
+float64 stop_time   # Time taken to stop (seconds)
