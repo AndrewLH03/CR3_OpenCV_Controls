@@ -1,0 +1,52 @@
+# Workspace Boundaries Configuration for CR3 Robotic Arm
+# Defines safe operating boundaries and limits
+
+workspace_validator:
+  ros__parameters:
+    # Physical workspace boundaries (in meters)
+    workspace_limits:
+      x_min: -0.6
+      x_max: 0.6
+      y_min: -0.6
+      y_max: 0.6
+      z_min: 0.0
+      z_max: 1.0
+    
+    # Safety zones
+    danger_zone:
+      x_min: -0.5
+      x_max: 0.5
+      y_min: -0.5
+      y_max: 0.5
+      z_min: 0.0
+      z_max: 0.8
+    
+    # Warning zone (triggers alerts before entering danger zone)
+    warning_zone:
+      x_min: -0.55
+      x_max: 0.55
+      y_min: -0.55
+      y_max: 0.55
+      z_min: 0.0
+      z_max: 0.9
+    
+    # Joint angle limits (in radians)
+    joint_limits:
+      base_rotation: [-3.14159, 3.14159]  # 360 degrees
+      shoulder: [-1.5708, 1.5708]         # 90 degrees each direction
+      elbow: [-2.0944, 2.0944]            # 120 degrees each direction
+      wrist_pitch: [-1.5708, 1.5708]      # 90 degrees each direction
+      wrist_roll: [-3.14159, 3.14159]     # 360 degrees
+      gripper: [0.0, 0.04]                # 0-40mm opening
+    
+    # Velocity limits (rad/s)
+    velocity_limits:
+      max_joint_velocity: 1.0
+      max_linear_velocity: 0.1
+      max_angular_velocity: 0.5
+    
+    # Safety monitoring
+    monitoring:
+      check_frequency: 50.0  # Hz
+      alert_delay: 0.1       # seconds before triggering alert
+      emergency_stop_delay: 0.05  # seconds before emergency stop

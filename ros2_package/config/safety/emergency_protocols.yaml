@@ -1,0 +1,51 @@
+# Emergency Protocols Configuration for CR3 Robotic Arm
+# Defines emergency response procedures and parameters
+
+emergency_stop_handler:
+  ros__parameters:
+    # Emergency stop types and responses
+    emergency_types:
+      physical_button:
+        priority: 1
+        response_time_ms: 50
+        action: "immediate_stop"
+        recovery: "manual_reset"
+      
+      software_limit:
+        priority: 2
+        response_time_ms: 100
+        action: "controlled_stop"
+        recovery: "automatic_after_clear"
+      
+      workspace_violation:
+        priority: 3
+        response_time_ms: 200
+        action: "retract_to_safe"
+        recovery: "automatic_after_clear"
+      
+      communication_loss:
+        priority: 4
+        response_time_ms: 500
+        action: "hold_position"
+        recovery: "automatic_on_reconnect"
+    
+    # Safe positions for emergency retraction
+    safe_positions:
+      home_position: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      retract_position: [0.0, -0.5, 1.0, 0.5, 0.0, 0.0]
+      maintenance_position: [0.0, -1.5, 1.5, 1.5, 0.0, 0.02]
+    
+    # Recovery procedures
+    recovery:
+      auto_recovery_timeout: 30.0  # seconds
+      manual_confirmation_required: true
+      diagnostics_check_required: true
+      gradual_restart: true
+      restart_velocity_scale: 0.5
+    
+    # Emergency logging
+    logging:
+      log_all_events: true
+      emergency_log_level: "WARN"
+      recovery_log_level: "INFO"
+      log_file_path: "/tmp/cr3_emergency_log.txt"

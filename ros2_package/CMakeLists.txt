@@ -23,19 +23,19 @@ find_package(rosidl_default_generators REQUIRED)
 
 # Generate messages
 rosidl_generate_interfaces(${PROJECT_NAME}
-  "msg/BasicCommand.msg"
-  "msg/RobotStatus.msg"
-  "msg/HandPosition.msg"
-  "msg/SafetyStatus.msg"
-  "msg/SafetyAlert.msg"
-  "msg/CoordinateTransform.msg"
-  "srv/EmergencyStop.srv"
-  "srv/SetParameters.srv"
+  "msg/robot/BasicCommand.msg"
+  "msg/robot/RobotStatus.msg"
+  "msg/perception/HandPosition.msg"
+  "msg/safety/SafetyStatus.msg"
+  "msg/safety/SafetyAlert.msg"
+  "msg/coordination/CoordinateTransform.msg"
+  "srv/safety/EmergencyStop.srv"
+  "srv/robot/SetParameters.srv"
   DEPENDENCIES builtin_interfaces std_msgs geometry_msgs diagnostic_msgs
 )
 
 # Build basic robot controller executable
-add_executable(basic_robot_controller src/basic_robot_controller.cpp)
+add_executable(basic_robot_controller src/robot_control/basic_robot_controller.cpp)
 
 ament_target_dependencies(basic_robot_controller
   rclcpp
@@ -51,7 +51,7 @@ ament_target_dependencies(basic_robot_controller
 )
 
 # Build workspace validator executable
-add_executable(workspace_validator src/workspace_validator.cpp)
+add_executable(workspace_validator src/safety/workspace_validator.cpp)
 
 ament_target_dependencies(workspace_validator
   rclcpp
@@ -61,7 +61,7 @@ ament_target_dependencies(workspace_validator
 )
 
 # Build emergency stop handler executable
-add_executable(emergency_stop_handler src/emergency_stop_handler.cpp)
+add_executable(emergency_stop_handler src/safety/emergency_stop_handler.cpp)
 
 ament_target_dependencies(emergency_stop_handler
   rclcpp
@@ -71,7 +71,7 @@ ament_target_dependencies(emergency_stop_handler
 )
 
 # Build coordinate broadcaster executable
-add_executable(coordinate_broadcaster src/coordinate_broadcaster.cpp)
+add_executable(coordinate_broadcaster src/coordination/coordinate_broadcaster.cpp)
 
 ament_target_dependencies(coordinate_broadcaster
   rclcpp
@@ -99,11 +99,11 @@ install(TARGETS
 
 # Install Python scripts
 install(PROGRAMS
-  scripts/parameter_manager.py
-  scripts/diagnostics_monitor.py
-  scripts/safety_monitor.py
-  scripts/transform_manager.py
-  scripts/calibration_node.py
+  scripts/robot_control/parameter_manager.py
+  scripts/robot_control/diagnostics_monitor.py
+  scripts/safety/safety_monitor.py
+  scripts/coordination/transform_manager.py
+  scripts/coordination/calibration_node.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

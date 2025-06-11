@@ -1,0 +1,29 @@
+# Motion Planning Configuration
+# Advanced motion planning and trajectory parameters
+
+motion_planner:
+  ros__parameters:
+    # Planning algorithm settings
+    planner_type: "RRT_STAR"  # RRT, RRT_STAR, PRM
+    planning_time_limit: 5.0   # seconds
+    max_iterations: 1000
+    
+    # Path optimization
+    smoothing_enabled: true
+    smoothing_iterations: 50
+    path_tolerance: 2.0        # mm
+    
+    # Trajectory generation
+    trajectory_resolution: 0.01  # seconds
+    velocity_scaling: 0.8       # 80% of max velocity
+    acceleration_scaling: 0.6   # 60% of max acceleration
+    
+    # Collision checking
+    collision_check_resolution: 0.005  # seconds
+    self_collision_enabled: true
+    environment_collision_enabled: true
+    
+    # Workspace constraints
+    orientation_constraints: false
+    position_constraints: true
+    joint_constraints: true

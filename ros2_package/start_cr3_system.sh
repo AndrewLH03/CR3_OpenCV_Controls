@@ -58,7 +58,7 @@ fi
 
 # Check for required executables
 echo "Checking C++ executables..."
-EXECUTABLES=("safety_monitor" "emergency_stop_handler" "workspace_validator" "coordinate_broadcaster")
+EXECUTABLES=("basic_robot_controller" "emergency_stop_handler" "workspace_validator" "coordinate_broadcaster")
 for exe in "${EXECUTABLES[@]}"; do
     if [ -f "$ROS2_PACKAGE_DIR/install/cr3_hand_control/lib/cr3_hand_control/$exe" ]; then
         echo -e "${GREEN}✓ $exe executable found${NC}"
@@ -121,7 +121,7 @@ fi
 if [ "$INTEGRATION_TEST" = true ]; then
     echo -e "${BLUE}Step 3: Running integration test...${NC}"
     cd "$ROS2_PACKAGE_DIR"
-    python3 test/test_phase3_integration.py
+    python3 test/integration/test_phase3_integration.py
     echo -e "${GREEN}✓ Integration test completed successfully!${NC}"
 fi
 
@@ -129,14 +129,14 @@ if [ "$START_SAFETY" = true ]; then
     echo -e "${BLUE}Step 3: Starting safety system...${NC}"
     echo -e "${YELLOW}Starting safety monitor (Ctrl+C to stop)${NC}"
     cd "$ROS2_PACKAGE_DIR"
-    python3 scripts/safety_monitor.py
+    python3 scripts/safety/safety_monitor.py
 fi
 
 if [ "$START_FULL_SYSTEM" = true ]; then
     echo -e "${BLUE}Step 3: Starting complete Phase 3 system...${NC}"
     echo -e "${YELLOW}Launching Phase 3 complete system (Ctrl+C to stop)${NC}"
     cd "$ROS2_PACKAGE_DIR"
-    ros2 launch cr3_hand_control phase3_complete.launch.py
+    ros2 launch cr3_hand_control complete_system.launch.py
 fi
 
 echo -e "${GREEN}🎯 CR3 system ready!${NC}"

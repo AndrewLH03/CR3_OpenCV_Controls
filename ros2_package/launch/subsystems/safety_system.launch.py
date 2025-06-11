@@ -19,8 +19,10 @@ def launch_setup(context, *args, **kwargs):
     pkg_dir = get_package_share_directory('cr3_hand_control')
     
     # Config file paths
-    safety_params_file = os.path.join(pkg_dir, 'config', 'safety_params.yaml')
-    robot_params_file = os.path.join(pkg_dir, 'config', 'robot_params.yaml')
+    safety_params_file = os.path.join(pkg_dir, 'config', 'safety', 'safety_params_ros2.yaml')
+    workspace_boundaries_file = os.path.join(pkg_dir, 'config', 'safety', 'workspace_boundaries.yaml')
+    emergency_protocols_file = os.path.join(pkg_dir, 'config', 'safety', 'emergency_protocols.yaml')
+    robot_params_file = os.path.join(pkg_dir, 'config', 'robot', 'cr3_parameters.yaml')
     
     # Safety Monitor Node (Python)
     safety_monitor_node = Node(
@@ -43,7 +45,7 @@ def launch_setup(context, *args, **kwargs):
         executable='workspace_validator',
         name='workspace_validator',
         output='screen',
-        parameters=[safety_params_file, robot_params_file],
+        parameters=[workspace_boundaries_file, robot_params_file],
         remappings=[
             ('/robot_status', '/robot_status'),
             ('/workspace_valid', '/workspace_valid')
@@ -56,7 +58,7 @@ def launch_setup(context, *args, **kwargs):
         executable='emergency_stop_handler',
         name='emergency_stop_handler',
         output='screen',
-        parameters=[safety_params_file],
+        parameters=[emergency_protocols_file, safety_params_file],
         remappings=[
             ('/safety_alerts', '/safety_alerts'),
             ('/robot_status', '/robot_status'),

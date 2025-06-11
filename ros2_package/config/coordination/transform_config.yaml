@@ -1,0 +1,54 @@
+# Transform Definitions Configuration for CR3 System
+# Defines coordinate frame relationships and transformations
+
+transform_manager:
+  ros__parameters:
+    # Base coordinate frames
+    frames:
+      world_frame: "world"
+      robot_base_frame: "robot_base"
+      camera_frame: "camera_frame"
+      hand_tracking_frame: "hand_tracking_frame"
+      end_effector_frame: "end_effector"
+      gripper_frame: "gripper"
+    
+    # Static transforms (position: [x, y, z], orientation: [x, y, z, w])
+    static_transforms:
+      world_to_robot_base:
+        translation: [0.0, 0.0, 0.0]
+        rotation: [0.0, 0.0, 0.0, 1.0]
+        
+      robot_base_to_camera:
+        translation: [0.2, 0.0, 0.8]  # Camera mounted above and in front
+        rotation: [0.0, 0.707, 0.0, 0.707]  # Looking down 90 degrees
+        
+      camera_to_hand_tracking:
+        translation: [0.0, 0.0, 0.0]
+        rotation: [0.0, 0.0, 0.0, 1.0]
+    
+    # Dynamic transform parameters
+    dynamic_transforms:
+      publish_rate: 100.0  # Hz
+      buffer_size: 10.0    # seconds
+      
+    # Transform validation
+    validation:
+      max_translation_change: 0.1  # meters per update
+      max_rotation_change: 0.1     # radians per update
+      timeout_warning: 1.0         # seconds
+      timeout_error: 5.0           # seconds
+    
+    # Coordinate system conversions
+    conversions:
+      # Camera pixel coordinates to world coordinates
+      pixel_to_world:
+        scale_x: 0.001
+        scale_y: 0.001
+        offset_x: 0.0
+        offset_y: 0.0
+        
+      # Hand tracking to robot coordinates
+      hand_to_robot:
+        scale_factor: 1.0
+        offset: [0.0, 0.0, 0.0]
+        rotation_offset: [0.0, 0.0, 0.0]

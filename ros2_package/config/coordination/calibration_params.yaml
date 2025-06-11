@@ -1,14 +1,16 @@
-calibration:
-  camera_frame: "camera_link"
-  robot_base_frame: "base_link"
-  world_frame: "world"
-  
-  accuracy_requirements:
-    position_tolerance: 2.0  # mm
-    rotation_tolerance: 1.0  # degrees
-    
-  calibration_points:
-    num_points: 9           # 3x3 grid for calibration
+coordinate_broadcaster:
+  ros__parameters:
+    calibration:
+      camera_frame: "camera_link"
+      robot_base_frame: "base_link"
+      world_frame: "world"
+      
+      accuracy_requirements:
+        position_tolerance: 2.0  # mm
+        rotation_tolerance: 1.0  # degrees
+        
+      calibration_points:
+        num_points: 9           # 3x3 grid for calibration
     workspace_coverage: 0.8  # Use 80% of workspace for calibration
     
   validation:

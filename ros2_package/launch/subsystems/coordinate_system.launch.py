@@ -19,8 +19,10 @@ def launch_setup(context, *args, **kwargs):
     pkg_dir = get_package_share_directory('cr3_hand_control')
     
     # Config file paths
-    calibration_params_file = os.path.join(pkg_dir, 'config', 'calibration_params.yaml')
-    robot_params_file = os.path.join(pkg_dir, 'config', 'robot_params.yaml')
+    calibration_params_file = os.path.join(pkg_dir, 'config', 'coordination', 'calibration_params.yaml')
+    transform_config_file = os.path.join(pkg_dir, 'config', 'coordination', 'transform_config.yaml')
+    frame_management_file = os.path.join(pkg_dir, 'config', 'coordination', 'frame_management.yaml')
+    robot_params_file = os.path.join(pkg_dir, 'config', 'robot', 'cr3_parameters.yaml')
     
     # Transform Manager Node (Python)
     transform_manager_node = Node(
@@ -28,7 +30,7 @@ def launch_setup(context, *args, **kwargs):
         executable='transform_manager.py',
         name='transform_manager',
         output='screen',
-        parameters=[calibration_params_file, robot_params_file],
+        parameters=[transform_config_file, robot_params_file],
         remappings=[
             ('/coordinate_transforms', '/coordinate_transforms')
         ]
@@ -40,7 +42,7 @@ def launch_setup(context, *args, **kwargs):
         executable='coordinate_broadcaster',
         name='coordinate_broadcaster',
         output='screen',
-        parameters=[calibration_params_file],
+        parameters=[frame_management_file, calibration_params_file],
     )
     
     # Calibration Node (Python) - Optional, can be launched separately

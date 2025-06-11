@@ -1,0 +1,42 @@
+# Camera Configuration for CR3 Hand Tracking System
+# Defines camera settings and calibration parameters
+
+camera_node:
+  ros__parameters:
+    # Camera device settings
+    device:
+      camera_id: 0
+      width: 640
+      height: 480
+      fps: 30
+      format: "MJPG"
+    
+    # Camera calibration matrix (example values - should be calibrated)
+    calibration:
+      camera_matrix: [
+        [620.0, 0.0, 320.0],
+        [0.0, 620.0, 240.0],
+        [0.0, 0.0, 1.0]
+      ]
+      distortion_coefficients: [0.1, -0.2, 0.0, 0.0, 0.0]
+      
+    # Image processing settings
+    processing:
+      exposure: -3
+      brightness: 0
+      contrast: 1.0
+      saturation: 1.0
+      auto_white_balance: true
+      
+    # Publication settings
+    publishing:
+      compressed: true
+      quality: 85
+      publish_rate: 30.0  # Hz
+      frame_id: "camera_frame"
+    
+    # Debug settings
+    debug:
+      show_preview: false
+      save_calibration_images: false
+      calibration_image_path: "/tmp/camera_calibration/"

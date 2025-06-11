@@ -45,6 +45,7 @@ def generate_launch_description():
             PathJoinSubstitution([
                 FindPackageShare('cr3_hand_control'),
                 'launch',
+                'subsystems',
                 'safety_system.launch.py'
             ])
         ]),
@@ -60,6 +61,7 @@ def generate_launch_description():
             PathJoinSubstitution([
                 FindPackageShare('cr3_hand_control'),
                 'launch',
+                'subsystems',
                 'coordinate_system.launch.py'
             ])
         ]),
@@ -77,8 +79,9 @@ def generate_launch_description():
         name='basic_robot_controller',
         output='screen',
         parameters=[
-            os.path.join(pkg_dir, 'config', 'robot_params.yaml'),
-            os.path.join(pkg_dir, 'config', 'safety_params.yaml')
+            os.path.join(pkg_dir, 'config', 'robot', 'cr3_parameters.yaml'),
+            os.path.join(pkg_dir, 'config', 'robot', 'motion_config.yaml'),
+            os.path.join(pkg_dir, 'config', 'safety', 'safety_params_ros2.yaml')
         ]
     )
     
@@ -88,7 +91,9 @@ def generate_launch_description():
         executable='parameter_manager.py',
         name='parameter_manager',
         output='screen',
-        parameters=[os.path.join(pkg_dir, 'config', 'robot_params.yaml')]
+        parameters=[
+            os.path.join(pkg_dir, 'config', 'robot', 'cr3_parameters.yaml')
+        ]
     )
     
     # Diagnostics monitor from Phase 2

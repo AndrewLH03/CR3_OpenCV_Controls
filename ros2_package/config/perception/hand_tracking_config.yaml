@@ -1,0 +1,58 @@
+# Hand Tracking Configuration for CR3 System
+# Defines MediaPipe and OpenCV hand detection parameters
+
+hand_tracking_node:
+  ros__parameters:
+    # MediaPipe Hand settings
+    mediapipe:
+      model_complexity: 1         # 0=lite, 1=full (default), 2=heavy
+      min_detection_confidence: 0.7
+      min_tracking_confidence: 0.5
+      max_num_hands: 2
+      static_image_mode: false
+      
+    # Hand landmark filtering
+    filtering:
+      enable_smoothing: true
+      smoothing_factor: 0.8
+      position_threshold: 0.01    # meters
+      velocity_threshold: 0.1     # m/s
+      
+    # Coordinate transformation
+    coordinates:
+      # Camera to robot base transformation
+      camera_to_robot_offset: [0.0, 0.0, 0.5]  # [x, y, z] in meters
+      camera_rotation: [0.0, 0.0, 0.0]         # [roll, pitch, yaw] in radians
+      
+      # Scaling factors
+      pixel_to_meter_scale: 0.001  # Convert pixels to meters
+      depth_scale: 1.0             # Depth scaling factor
+      
+    # Hand detection zones
+    detection_zones:
+      active_zone:
+        x_min: 100    # pixels
+        x_max: 540
+        y_min: 80
+        y_max: 400
+        
+      tracking_zone:
+        x_min: 50     # pixels
+        x_max: 590
+        y_min: 30
+        y_max: 450
+    
+    # Publishing settings
+    publishing:
+      publish_rate: 30.0          # Hz
+      publish_raw_landmarks: false
+      publish_filtered_position: true
+      frame_id: "hand_tracking_frame"
+      
+    # Debug visualization
+    debug:
+      draw_landmarks: true
+      draw_connections: true
+      draw_bounding_box: true
+      show_confidence: true
+      save_debug_images: false

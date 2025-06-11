@@ -1,0 +1,68 @@
+# Frame Management Configuration for CR3 System
+# Defines coordinate frame hierarchies and relationships
+
+coordinate_broadcaster:
+  ros__parameters:
+    # Frame hierarchy definition
+    frame_hierarchy:
+      root_frame: "world"
+      
+      # Primary chain: world -> robot_base -> joints -> end_effector
+      robot_chain:
+        - "world"
+        - "robot_base"
+        - "shoulder_link"
+        - "elbow_link"
+        - "wrist_link"
+        - "end_effector"
+        - "gripper"
+      
+      # Perception chain: world -> camera -> hand_tracking
+      perception_chain:
+        - "world"
+        - "camera_frame"
+        - "hand_tracking_frame"
+    
+    # Joint frame definitions for CR3 robot
+    joint_frames:
+      base_joint:
+        parent: "robot_base"
+        child: "shoulder_link"
+        type: "revolute"
+        axis: [0, 0, 1]  # Z-axis rotation
+        
+      shoulder_joint:
+        parent: "shoulder_link"
+        child: "elbow_link"
+        type: "revolute"
+        axis: [0, 1, 0]  # Y-axis rotation
+        
+      elbow_joint:
+        parent: "elbow_link"
+        child: "wrist_link"
+        type: "revolute"
+        axis: [0, 1, 0]  # Y-axis rotation
+        
+      wrist_joint:
+        parent: "wrist_link"
+        child: "end_effector"
+        type: "revolute"
+        axis: [0, 1, 0]  # Y-axis rotation
+        
+      gripper_joint:
+        parent: "end_effector"
+        child: "gripper"
+        type: "prismatic"
+        axis: [1, 0, 0]  # X-axis translation
+    
+    # Publishing settings
+    publishing:
+      rate: 50.0  # Hz
+      tf_prefix: ""
+      publish_static_tf: true
+      
+    # Frame validation
+    validation:
+      check_consistency: true
+      warn_on_missing_parent: true
+      timeout_threshold: 1.0  # seconds

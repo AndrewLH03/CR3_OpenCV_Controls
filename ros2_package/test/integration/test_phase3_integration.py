@@ -183,7 +183,7 @@ def main():
         
         if os.path.exists(local_setup):
             # Source ROS2 installation and local package overlay
-            safety_monitor_cmd = f'source {ros2_setup} && source {local_setup} && python3 scripts/safety_monitor.py'
+            safety_monitor_cmd = f'source {ros2_setup} && source {local_setup} && python3 scripts/safety/safety_monitor.py'
             safety_monitor_process = subprocess.Popen([
                 'bash', '-c', safety_monitor_cmd
             ], cwd=ros2_package_dir, env=env)
