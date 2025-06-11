@@ -1,0 +1,64 @@
+# Hand Tracking Configuration
+# MediaPipe and OpenCV settings for hand detection
+
+hand_tracking:
+  # Camera configuration
+  camera:
+    device_id: 0              # Default USB camera
+    width: 640               # Camera resolution width
+    height: 480              # Camera resolution height
+    fps: 30                  # Frames per second
+    
+  # MediaPipe settings
+  mediapipe:
+    static_image_mode: false
+    max_num_hands: 1         # Track single hand for precision
+    min_detection_confidence: 0.7
+    min_tracking_confidence: 0.5
+    
+  # Coordinate mapping
+  coordinate_mapping:
+    # Camera workspace to robot workspace mapping
+    camera_workspace:
+      width: 640             # pixels
+      height: 480            # pixels
+      
+    robot_workspace:
+      x_center: 200          # mm from robot base
+      y_center: 0            # mm from robot base  
+      z_base: 150            # mm above table
+      width: 400             # mm workspace width
+      height: 300            # mm workspace height
+      depth: 200             # mm workspace depth
+      
+  # Gesture recognition
+  gestures:
+    pinch_threshold: 30      # pixels - distance for pinch detection
+    fist_threshold: 0.3      # confidence for fist detection
+    open_hand_threshold: 0.7 # confidence for open hand
+    
+  # Filtering and smoothing
+  filtering:
+    enabled: true
+    smoothing_factor: 0.3    # 0.0 = no smoothing, 1.0 = maximum smoothing
+    noise_reduction: true
+    
+  # Display settings
+  display:
+    show_landmarks: true
+    show_connections: true
+    show_workspace: true
+    mirror_display: true     # Mirror camera feed horizontally
+    
+# Performance settings
+performance:
+  processing_threads: 2
+  max_queue_size: 10
+  frame_skip: 0            # Skip frames if processing is slow
+  
+# Debug settings
+debug:
+  save_frames: false
+  log_coordinates: false
+  show_fps: true
+  verbose_logging: false

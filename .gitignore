@@ -1,0 +1,65 @@
+# Exclude the TCP-IP-ROS-6AXis directory (not our repository)
+TCP-IP-ROS-6AXis/
+
+# Exclude embedded git repositories
+Archive/legacy_hand_tracking/
+
+# Build directories
+build/
+install/
+log/
+devel/
+
+# ROS 2 build artifacts
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+compile_commands.json
+
+# IDE files (commented out to allow workspace settings)
+# .vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Logs
+*.log
+
+# ROS specific
+*.bag
+*.cfg
+msg_gen/
+srv_gen/
+
+# Python
+*.egg-info/
+dist/
+*.egg
+
+# Backup files
+*~
+*.bak
+*.backup
+
+# Temporary files
+*.temp
+*.tmp
