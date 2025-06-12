@@ -13,6 +13,9 @@ colcon build --symlink-install
 # Source environment
 source install/setup.bash
 
+# Test pose recognition (Phase 4)
+./quick_start_pose_recognition.sh
+
 # Run integration test
 ./start_cr3_system.sh --test
 
@@ -42,11 +45,12 @@ source install/setup.bash
 ├── Config: config/coordination/
 └── Tests: test/unit/coordination/
 
-👁️ Perception (Phase 4):
-├── C++: src/perception/
-├── Python: scripts/perception/
-├── Config: config/perception/
-└── Tests: test/unit/perception/
+👁️ Pose Recognition (Phase 4 ✅):
+├── Node: src/cr3_hand_control/pose_recognition_node.py
+├── Messages: msg/PoseCoordinates.msg, PoseTrackingStatus.msg
+├── Config: config/perception/pose_recognition_params.yaml
+├── Launch: launch/testing/pose_recognition_test.launch.py
+└── Reference: Documentation/References/working_implementations/
 ```
 
 ### Launch Files:

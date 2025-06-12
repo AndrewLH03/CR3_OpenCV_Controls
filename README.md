@@ -2,24 +2,24 @@
 
 **Advanced robotic arm control system with real-time hand tracking using OpenCV and MediaPipe computer vision for DoBot CR3 robot manipulation in 3D space.**
 
-**Version:** 3.0.0  
-**Status:** 🟢 Production Ready - Reorganized Structure  
-**Architecture:** Hybrid Python-ROS2 Implementation  
-**Last Updated:** June 10, 2025
+**Version:** 4.0.0  
+**Status:** 🟢 Production Ready - Phase 4 Complete  
+**Architecture:** ROS2 Jazzy with Pose Recognition  
+**Last Updated:** June 11, 2025
 
 ---
 
 ## 🎯 Project Overview
 
-This system provides seamless control of a DoBot CR3 robotic arm through hand tracking technology. The project features a modern ROS2 Jazzy Jalisco architecture with complete backward compatibility for TCP communication.
+This system provides seamless control of a DoBot CR3 robotic arm through advanced pose recognition technology. The project features a modern ROS2 Jazzy Jalisco architecture with MediaPipe-based shoulder and wrist tracking for precise robot control.
 
 ### ✨ Key Features
-- 🖐️ **Real-time Hand Tracking** - MediaPipe-powered gesture recognition
-- 🤖 **ROS2 Jazzy Integration** - Modern robotics middleware
-- 🔄 **Dual Communication** - TCP and ROS2 protocols supported
-- 🛡️ **Advanced Safety Systems** - Comprehensive collision detection
-- 🎮 **Interactive Dashboards** - Real-time monitoring and control
-- 📊 **Performance Analytics** - Session reporting and metrics
+- 🦴 **Advanced Pose Recognition** - MediaPipe pose + hand detection for shoulder-wrist tracking
+- 🤖 **ROS2 Jazzy Integration** - Modern robotics middleware with custom messages
+- 🔄 **Real-time Processing** - 30+ FPS pose tracking with coordinate transformation
+- 🛡️ **Advanced Safety Systems** - Comprehensive workspace monitoring and alerts
+- 🎮 **Debug Visualization** - Real-time pose overlay and performance monitoring
+- 📊 **Performance Analytics** - Comprehensive system health and metrics
 
 ---
 
@@ -82,23 +82,30 @@ colcon build --packages-select cr3_hand_control
 source install/setup.bash
 ```
 
-### 2. Run Hand Tracking Dashboard
+### 2. Test Pose Recognition (Phase 4)
 ```bash
-# Start the hand tracking interface
+# Quick start pose recognition system
+cd ros2_package/
+./quick_start_pose_recognition.sh
+
+# Or manually test pose recognition
+source install/setup.bash
+ros2 launch cr3_hand_control pose_recognition_test.launch.py
+```
+
+### 3. Run Legacy Hand Tracking Dashboard
+```bash
+# Start the original hand tracking interface (preserved)
 cd Dashboards/hand_tracking/
 python Hand_Tracking.py
 ```
 
-### 3. Start Robot Control
+### 4. Launch Complete System (Production)
 ```bash
-# Run the basic robot controller
-cd Robot_Controls/
-python cr3_simple_controller.py
+# Launch full ROS2 system with pose recognition
+source ros2_package/install/setup.bash
+ros2 launch cr3_hand_control cr3_complete_system.launch.py
 ```
-
-### 4. Launch Complete System (ROS2)
-```bash
-# Launch full ROS2 system (when available)
 cd ros2_package
 ros2 launch cr3_hand_control complete_system.launch.py
 ```

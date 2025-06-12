@@ -20,6 +20,8 @@ find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
+find_package(cv_bridge REQUIRED)
+find_package(image_transport REQUIRED)
 
 # Generate messages
 rosidl_generate_interfaces(${PROJECT_NAME}
@@ -29,9 +31,12 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/safety/SafetyStatus.msg"
   "msg/safety/SafetyAlert.msg"
   "msg/coordination/CoordinateTransform.msg"
+  "msg/PoseCoordinates.msg"
+  "msg/PoseTrackingStatus.msg"
+  "msg/DebugInfo.msg"
   "srv/safety/EmergencyStop.srv"
   "srv/robot/SetParameters.srv"
-  DEPENDENCIES builtin_interfaces std_msgs geometry_msgs diagnostic_msgs
+  DEPENDENCIES builtin_interfaces std_msgs geometry_msgs diagnostic_msgs sensor_msgs
 )
 
 # Build basic robot controller executable
@@ -104,6 +109,7 @@ install(PROGRAMS
   scripts/safety/safety_monitor.py
   scripts/coordination/transform_manager.py
   scripts/coordination/calibration_node.py
+  src/cr3_hand_control/pose_recognition_node.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

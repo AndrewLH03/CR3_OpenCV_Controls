@@ -1,0 +1,31 @@
+# Pose Recognition Node Configuration
+# Based on working Dashboards implementation
+
+pose_recognition_node:
+  ros__parameters:
+    # Camera configuration
+    camera_id: 0
+    publish_rate: 30.0
+    
+    # MediaPipe pose detection parameters
+    pose_detection_confidence: 0.5
+    pose_tracking_confidence: 0.5
+    
+    # MediaPipe hand detection parameters  
+    hand_detection_confidence: 0.5
+    hand_tracking_confidence: 0.5
+    
+    # Tracking configuration
+    tracked_hand: "Right"  # "Right" or "Left"
+    
+    # Feature toggles
+    enable_debug_image: true
+    enable_robot_control: true
+    
+    # Coordinate transformation parameters
+    workspace_width: 400.0   # mm
+    workspace_height: 300.0  # mm 
+    workspace_depth: 200.0   # mm
+    base_x_offset: 200.0     # mm forward from robot base
+    base_y_offset: 0.0       # mm centered
+    base_z_offset: 150.0     # mm above table
